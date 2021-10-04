@@ -1,5 +1,5 @@
 const totalSeconds = 60 * 60 * 3;
-const timestepInSeconds = 300;
+const timestepInSeconds = 200;
 const start = Cesium.JulianDate.fromDate(new Date());
 const stop = Cesium.JulianDate.addSeconds(start, totalSeconds, new Cesium.JulianDate());
 const startTime = Cesium.JulianDate.addSeconds(start, -totalSeconds, new Cesium.JulianDate());
@@ -158,7 +158,7 @@ function drawOrbit( satArr, index, entity) {
     let positionArrSampled = [];
     let positionsOverTime = new Cesium.SampledPositionProperty()
 
-    for (let i = -period; i < period; i += 5) {
+    for (let i = -period; i < period; i += 10) {
         const time = Cesium.JulianDate.addSeconds(start, i, new Cesium.JulianDate());
         // let positionsOverTime = satellite.propagate(satArr[index], jsDate);
         // console.log(positionsOverTime);

@@ -24,8 +24,9 @@
         <h2 class="loading-text" id="loading-text" style="color: white">downloading assets...</h1>
     </div>
     <div id="cesiumContainer" class="fullSize">
+        <button onclick="history.back()" class="orbit" id="orbit"> back </button>
         <div class="panel" id="panel">
-            <h1> Filter Debris </h1>
+            <h1> Filter Entities </h1>
             <input type="checkbox" id="debris-select" name="debris" value="debris-selected" checked>
             <label for="debris-select" id="debris-label">Debris</label><br>
             <input type="checkbox" id="payload-select" name="payload" value="payload-selected" checked>
@@ -34,7 +35,6 @@
             <label for="rocket-body-select" id="rocket-body-label">Rocket Body</label><br>
         </div>
         <div class="panel" id="right-panel">
-
         </div>
     </div>
     <script async src="viewer.js"></script>

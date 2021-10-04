@@ -9,4 +9,5 @@ window.onload = async() => {
     }
     await sleep(500);
     document.getElementById("panel").style.display = "block";
+    document.getElementById("orbit").style.display = "block";
 }

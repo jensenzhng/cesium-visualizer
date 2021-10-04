@@ -9,7 +9,7 @@ body {
 
 .fullSize {
     width: 100%;
-    height: 100%;
+    height: 100vh;
 }
 
 * {
@@ -64,7 +64,7 @@ body {
 
 #right-panel {
     position: absolute;
-    top:50px;
+    top:100px;
     right: 5px;
     width: 20%;
 }
@@ -93,4 +93,42 @@ h1 {
 
 .info {
     color: white;
+}
+
+.orbit {
+    width: 75px;
+    height: 40px;
+    border: none;
+    background-color: #1F35FF;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 20px;
+    transition: ease-out 0.3s;
+    position: absolute;
+    top: 5px;
+    right: 100px;
+    z-index: 1;
+    display: none;
+}
+
+.orbit:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+.orbit:before {
+    transition: 0.5s all ease;
+    position: absolute;
+    opacity: 0;
+    content: "";
+    background-color: #FF906C;
+    border-radius: 5px;
+}
+
+.orbit:hover:before {
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    z-index: -1;
 }
