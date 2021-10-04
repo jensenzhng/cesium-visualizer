@@ -65,14 +65,14 @@ async function loadViewer(satArr) {
             }
             latestEntity = entity;
             entity.label = {
-                    text: `${entity.name}\nID: ${entity.id}`,
-                    font: "12px Helvetica",
-                    fillColor: Cesium.Color.WHITE,
-                    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-                    showBackground: true,
-                }
+                text: `${entity.name}\nID: ${entity.id}`,
+                font: "12px Helvetica",
+                fillColor: Cesium.Color.WHITE,
+                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                showBackground: true,
+            }
             let line = drawOrbit(satArr, entity.index, entity); //dragonlordslayer please find out how to get index of entity in satArr
-            
+
 
         } else {
             latestEntity.label = undefined;
@@ -108,7 +108,6 @@ function addToViewer(satrec, viewer, orbArr, i) {
         }
         satelliteEntity.velocity = positionAndVelocity.velocity;
         const gmst = satellite.gstime(jsDate);
-        // console.log(positionAndVelocity.position);
         const p = satellite.eciToGeodetic(positionAndVelocity.position, gmst);
 
         const position = Cesium.Cartesian3.fromRadians(p.longitude, p.latitude, p.height * 1000);
@@ -140,49 +139,34 @@ function addToViewer(satrec, viewer, orbArr, i) {
     return satellitePoint;
 }
 
-function drawOrbit( satArr, index, entity) {
+function drawOrbit(satArr, index, entity) {
     let type = entity.objectType;
     let color;
     if (type === "PAYLOAD") {
         color = Cesium.Color.BLUE
-    }
-    else if (type === 'ROCKET BODY') {
+    } else if (type === 'ROCKET BODY') {
         color = Cesium.Color.WHITE;
-    }
-    else {
+    } else {
         color = Cesium.Color.RED;
     }
 
     let period = entity.period * 60;
-    console.log(period)
     let positionArrSampled = [];
     let positionsOverTime = new Cesium.SampledPositionProperty()
 
     for (let i = -period; i < period; i += 10) {
         const time = Cesium.JulianDate.addSeconds(start, i, new Cesium.JulianDate());
-        // let positionsOverTime = satellite.propagate(satArr[index], jsDate);
-        // console.log(positionsOverTime);
         let pos = entity.position.getValue(time)
         if (typeof pos === 'undefined') {
             console.log(time);
             break;
         }
-        //positionsOverTime.addSample(time, pos)
 
         positionArrSampled.push(pos)
 
     }
     console.log(positionArrSampled);
-    // let currentPos = entity.position.getValue(date)
-    // console.log(currentPos);
-    // viewer.entities.add({
-    //     position: currentPos,
-    //     point : { pixelSize: 5, color: Cesium.Color.BLUE }
-    // })  
-    // for (let i = 0; i < positionArrSampled.length; i++) {
-    //     positionArrCart.push(new Cesium.Cartesian3(positionArrSampled[i]['x']*1000, positionArrSampled[i]['y']*1000, positionArrSampled[i]['z']*1000))
-    //     positionArrElements.push(positionArrSampled[i]['x']*1000, positionArrSampled[i]['y']*1000, positionArrSampled[i]['z']*1000)
-    // }
+
 
     return entity.polyline = {
         positions: positionArrSampled,
@@ -223,7 +207,7 @@ function updateCanvas(viewer, type, checked) {
 function showInfo(entity) {
     if (entity) {
         let panel = document.getElementById("right-panel")
-        let {name, id, objectType, period, inclination, eccentricity, meanMotion, semiMajorAxis} = entity
+        let { name, id, objectType, period, inclination, eccentricity, meanMotion, semiMajorAxis } = entity
         panel.innerHTML = `
         <h1> Entity Information </h1>
         <div class="info" id = "name"> Name: ${name}</div>
@@ -234,10 +218,9 @@ function showInfo(entity) {
         <div class="info" id = "eccentricity"> Eccenctricity: ${eccentricity}</div>
         <div class="info" id = "mean-motion"> Mean Motion: ${meanMotion} rad/min</div>
         <div class="info" id = "semi-major-axis"> Semi-Major Axis: ${semiMajorAxis} m</div>`
-        panel.style.display="block";
-    }
-    else {
-        document.getElementById("right-panel").style.display="none";
+        panel.style.display = "block";
+    } else {
+        document.getElementById("right-panel").style.display = "none";
     }
 }
 
